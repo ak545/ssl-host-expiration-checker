@@ -1,0 +1,17 @@
+# Host Group 1
+google.com
+google.ru
+youtube.com
+facebook.com
+twitter.com
+microsoft.com
+github.com
+
+# Host Group 2
+livejournal.com
+teletype.in
+habr.com
+codepen.io
+mail.ru
+yandex.ru
+mail.yandex.ru

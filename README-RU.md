@@ -2,19 +2,19 @@
 **ssl-check.py** - Это python-скрипт для проверки сроков окончания регистрации ssl-сертификатов для ваших веб-сайтов.
 
 ## Скриншоты
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/script0.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script0.png)
 > Скрипт. Опции
 
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/script1.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script1.png)
 > Скрипт в работе
 
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/script2.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script2.png)
 > Скрипт в работе
 
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/email.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/email.png)
 > Пример email
 
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/telegram.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/telegram.png)
 > Пример Telegram сообщения
 
 

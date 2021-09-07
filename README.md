@@ -3,19 +3,19 @@
 
 
 ## Screenshots
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/script0.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script0.png)
 > Script. Options
 
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/script1.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script1.png)
 > Script in working
 
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/script2.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script2.png)
 > Script in working
 
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/email.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/email.png)
 > A sample of the email
 
-![](https://github.com/ak545/ssl-host-expiration-checker/raw/master/images/telegram.png)
+![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/telegram.png)
 > A sample of the Telegram message
 
 ## Description

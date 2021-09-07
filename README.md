@@ -152,7 +152,8 @@ habr.com
 codepen.io
 mail.ru
 yandex.ru
-mail.yandex.ru```
+mail.yandex.ru
+```
 
 **-o STRING, --host STRING**
 

@@ -1,7 +1,9 @@
 # Host Group 1
+; This is comment
 google.com
 google.ru
 youtube.com
+
 facebook.com
 twitter.com
 microsoft.com

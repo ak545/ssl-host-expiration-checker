@@ -5,9 +5,9 @@
 # Author of the original script: Andrey Klimov < ak545 at mail dot ru >
 # https://github.com/ak545
 #
-# Current Version: 0.1.0
+# Current Version: 0.1.1
 # Creation Date: 2021-08-12 (dd-mm-yyyy)
-# Date of last changes: 2021-09-07 (dd-mm-yyyy)
+# Date of last changes: 2021-10-12 (dd-mm-yyyy)
 #
 # License:
 #  This program is free software; you can redistribute it and/or modify
@@ -58,7 +58,7 @@ except ImportError:
 init(autoreset=True)
 
 # Global constants
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 # Check Python Version
 if sys.version_info < (3, 6):
@@ -341,6 +341,9 @@ def prepaire_host_list(file: str) -> List[str]:
                     continue
                 else:
                     if len(ss) > 0:
+                        if ss.lstrip().startswith(';'):
+                            continue
+
                         host_list.append(ss)
             except Exception as e:
                 err = (

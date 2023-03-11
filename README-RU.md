@@ -7,10 +7,6 @@
 
 ![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script1.png)
 > Скрипт в работе
-
-![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script2.png)
-> Скрипт в работе
-
 ![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/email.png)
 > Пример email
 
@@ -60,6 +56,7 @@ $ python -m pip install --upgrade pip
 ### Установка и обновление зависимостей
 ```console
 $ pip install -U colorama
+$ pip install -U requests
 ```
 и
 ```console

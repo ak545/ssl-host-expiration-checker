@@ -9,9 +9,6 @@
 ![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script1.png)
 > Script in working
 
-![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/script2.png)
-> Script in working
-
 ![](https://raw.githubusercontent.com/ak545/ssl-host-expiration-checker/main/images/email.png)
 > A sample of the email
 
@@ -58,6 +55,7 @@ $ python -m pip install --upgrade pip
 ### Installing and update dependencies
 ```console
 $ pip install -U colorama
+$ pip install -U requests
 ```
 and
 ```console

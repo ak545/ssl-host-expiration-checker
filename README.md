@@ -1,4 +1,6 @@
 # SSL Host Expiration Checker from ak545
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
 **ssl-check.py** - This is a python script to check expiration dates of ssl certificate registrations for your websites.
 
 
@@ -55,6 +57,7 @@ $ python -m pip install --upgrade pip
 ### Installing and update dependencies
 ```console
 $ pip install -U colorama
+$ pip install -U dnspython
 $ pip install -U requests
 ```
 and
@@ -111,6 +114,7 @@ Options:
   -auth, --email-auth   Send email via authenticated SMTP (default is False)
   -starttls, --email-starttls
                         Send email via STARTTLS (default is False)
+  -g, --use-google-dns  Use Google DNS server 8.8.8.8 for resolve hosts (default is False)
   -nb, --no-banner      Do not print banner (default is False)
 
 (c) AK545 (Andrey Klimov) 2021, e-mail: ak545 at mail dot ru
@@ -151,6 +155,9 @@ codepen.io
 mail.ru
 yandex.ru
 mail.yandex.ru
+
+# Host with non-standart port
+example.tld:444
 ```
 
 **-o STRING, --host STRING**
@@ -194,6 +201,10 @@ Send email via authenticated SMTP (default is False). This is an additional opti
 **-starttls, --email-starttls**
 
 Send email via STARTTLS (default is False). This is an additional option for --email-to.
+
+**-g, --use-google-dns**
+
+Use Google DNS server 8.8.8.8 for resolve hosts (default is False).
 
 **-nb, --no-banner**
 
@@ -389,10 +400,22 @@ I, the author of this python script, wrote this script exclusively for my needs.
 You can make any changes to the script code and fork this script, provided that the link to [me](https://github.com/ak545) is indicated as a source of your inspiration.
 
 ## Postscriptum
-- The script was tested in Microsoft Windows 10/11, Linux Fedora 34, Linux Debian 9/10/11, Linux Ubuntu Desktop 18.04/20.04/21.04, Linux CentOS 6/7, Linux Manjaro 21.0.6/21.0.7.
-- Sorry for my bad English.
+- The script was tested in Microsoft Windows 10/11, Linux Fedora 36/37/38, Linux Debian 9/10/11/12, Linux Ubuntu Desktop 18.04/20.04/20.10/22.04.2/23.04, CentOS Linux 7.9/8.5, Rocky Linux 8.8/9.2, Linux Manjaro 22.1.3, Apple macOS 13.4.1 Ventura on MacBook Pro M1.
+
+
+
+
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+![Fedora](https://img.shields.io/badge/Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)
+![Debian](https://img.shields.io/badge/Debian-D70A53?style=for-the-badge&logo=debian&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![Cent OS](https://img.shields.io/badge/cent%20os-002260?style=for-the-badge&logo=centos&logoColor=F0F0F0)
+![Rocky Linux](https://img.shields.io/badge/-Rocky%20Linux-%2310B981?style=for-the-badge&logo=rockylinux&logoColor=white)
+![Manjaro](https://img.shields.io/badge/Manjaro-35BF5C?style=for-the-badge&logo=Manjaro&logoColor=white)
+![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
+
+- Sorry for my bad English. And on the other hand, which of you can boast of knowing the great and mighty Russian language? Have any of you read Pushkin, Tolstoy, Dostoyevsky, Gogol, Bulgakov in the original...? It's a joke.
 - The program code of the script is not perfect. But please forgive me for that.
-- All recommendations given by me for Apple macOS may contain inaccuracies. Sorry, I don’t have an Apple macBook on hand (but what if someone gives it to me?).
 - Glory to the E = mc &sup2; !
 - I wish you all good luck!
 

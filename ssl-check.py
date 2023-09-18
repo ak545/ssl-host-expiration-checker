@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 # Program: SSL Host Expiration Checker from ak545
 #
 # Author of the original script: Andrey Klimov < ak545 at mail dot ru >
 # https://github.com/ak545
 #
-# Current Version: 0.1.2
+# Current Version: 0.1.5
 # Creation Date: 2021-08-12 (yyyy-mm-dd)
-# Date of last changes: 2023-03-11 (yyyy-mm-dd)
+# Date of last changes: 2023-09-18 (yyyy-mm-dd)
 #
 # License:
 #  This program is free software; you can redistribute it and/or modify
@@ -44,6 +45,32 @@ or run pip install requests"""
     )
 
 try:
+    from dns import resolver
+except ImportError:
+    sys.exit(
+        """You need dnspython!
+install it from http://pypi.python.org/pypi/dnspython
+or run:
+    pip install dnspython
+or 
+    pip install dnspython[doh]
+or 
+    pip install dnspython[dnssec]
+or 
+    pip install dnspython[idna]
+or 
+    pip install dnspython[trio]
+or 
+    pip install dnspython[curio]
+or 
+    pip install dnspython[wmi]
+or 
+    pip install dnspython[doq]
+or 
+    pip install dnspython[doh,dnssec,idna]"""
+    )
+
+try:
     from colorama import init
     from colorama import Fore, Back, Style
 except ImportError:
@@ -57,7 +84,7 @@ or run pip install colorama"""
 init(autoreset=True)
 
 # Global constants
-__version__ = '0.1.2'
+__version__ = '0.1.5'
 
 # Check Python Version
 if sys.version_info < (3, 6):
@@ -284,6 +311,13 @@ def process_cli():
         help=f'{FLBC}Send email via STARTTLS (default is False)'
     )
     parent_group.add_argument(
+        '-g',
+        '--use-google-dns',
+        action='store_true',
+        default=False,
+        help=f'{FLBC}Use Google DNS server 8.8.8.8 for resolve hosts (default is False)'
+    )
+    parent_group.add_argument(
         '-nb',
         '--no-banner',
         action='store_true',
@@ -313,7 +347,8 @@ def print_cli() -> None:
         f'\tEmail SSL                : {CLI.email_ssl}\n'
         f'\tEmail AUTH               : {CLI.email_auth}\n'
         f'\tEmail STARTTLS           : {CLI.email_starttls}\n'
-        f'\tPrint banner             : {CLI.no_banner}\n'
+        f'\tUse Google DNS           : {CLI.use_google_dns}\n'
+        f'\tPrint banner             : {not CLI.no_banner}\n'
         f'\t-------------------------'
     )
 
@@ -684,8 +719,6 @@ def main() -> None:
         curr_len = len(host)
         max_len_hostname = curr_len if curr_len > max_len_hostname else max_len_hostname
 
-    port = 443
-
     s_host = 'Hosts'.rjust(max_len_hostname + 8)
     s_days = 'Days left'.ljust(10)
     print(
@@ -703,7 +736,15 @@ def main() -> None:
         f'{FLBC}{s_other}',
     )
 
+    res = None
+    if CLI.use_google_dns:
+        res = resolver.Resolver()
+        res.nameservers = ['8.8.8.8']
+
     for i, host in enumerate(hostname):
+        current_host = host
+        current_port = 443
+
         first_line = '' if i == 0 else '\n'
 
         if '#' in host:
@@ -713,27 +754,49 @@ def main() -> None:
             )
             continue
 
+        if ':' in host:
+            s_tmp = host.split(':')
+            current_host = s_tmp[0]
+            try:
+                current_port = int(s_tmp[1])
+            except ValueError as e:
+                print(f'{FLR}Error: {e}')
+                continue
+
+        google_host = None
+        if CLI.use_google_dns:
+            answers = res.resolve(current_host)
+            for rdata in answers:
+                google_host = rdata.address
+                break
+
         data = None
         try:
             context = ssl.create_default_context()
-            with socket.create_connection(address=(host, port)) as sock:
-                with context.wrap_socket(sock, server_hostname=host) as ssock:
-                    data = ssock.getpeercert()
+
+            if CLI.use_google_dns:
+                with socket.create_connection(address=(google_host, current_port)) as sock:
+                    with context.wrap_socket(sock, server_hostname=current_host) as ssock:
+                        data = ssock.getpeercert()
+            else:
+                with socket.create_connection(address=(current_host, current_port)) as sock:
+                    with context.wrap_socket(sock, server_hostname=current_host) as ssock:
+                        data = ssock.getpeercert()
 
         except Exception as e:
             s_host = host.lower().rjust(max_len_hostname + 8)
             s_days = f'Error: {str(e)}'
             print(
-                f"{FLR}{s_host}",
-                f"{FRC}{s_days}",
+                f'{FLR}{s_host}',
+                f'{FRC}{s_days}',
             )
             if 'certificate has expired' in str(e):
                 s_days = 'certificate has expired'
-            expires_hosts.append(f'{host.lower()};{s_days}')
+            expires_hosts.append(f'{current_host.lower()};{s_days}')
             continue
 
         if data is None:
-            s_host = host.lower().rjust(max_len_hostname + 8)
+            s_host = current_host.lower().rjust(max_len_hostname + 8)
             s_days = 'Error: ssock.getpeercert() return None'
             print(
                 f'{FLR}{s_host}',
@@ -764,9 +827,9 @@ def main() -> None:
             row_color2 = f'{FLC}'
 
         if is_expiried:
-            expires_hosts.append(f'{host.lower()};{dt_delta.days}')
+            expires_hosts.append(f'{current_host.lower()};{dt_delta.days}')
 
-        s_host = host.lower().rjust(max_len_hostname + 8)
+        s_host = current_host.lower().rjust(max_len_hostname + 8)
         s_days = '    ' + str(dt_delta.days)
         s_days = s_days.ljust(10)
         print(

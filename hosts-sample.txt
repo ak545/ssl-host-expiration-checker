@@ -17,3 +17,6 @@ codepen.io
 mail.ru
 yandex.ru
 mail.yandex.ru
+
+# Host with non-standart port
+example.tld:444
